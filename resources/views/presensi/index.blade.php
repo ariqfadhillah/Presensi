@@ -15,7 +15,7 @@
 					<div class="panel">
 						<div class="panel-heading">
 							<h3 class="panel-title">DATA MESIN PRESENSI</h3>
-							@if(auth()->user()->role == '1')
+							@if(auth()->user()->role == 'admin')
 							<div class="right">
 								<button type="button" class="btn"><i class="lnr lnr-plus-circle" data-toggle="modal" data-target="#exampleModal">Tambah</i></button>
 							</div>
