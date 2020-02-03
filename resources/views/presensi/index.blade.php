@@ -23,7 +23,6 @@
 							
 						</div>
 						<div class="panel-body">
-<!-- ini table ke 1 -->
 							<table id="table_id" class="display">
 							    <thead>
 							        <tr>
@@ -134,6 +133,7 @@
   $(function() {
         $('#table_id').DataTable({
             processing: true,
+            responsive: true,
             serverSide: true,
             ajax: "{{route('ajax')}}",
             columns: [
@@ -141,7 +141,8 @@
             {data: 'serialnumber', name: 'serialnumber'},
             {data: 'location', name: 'location'},
             {data: 'timeZoneAdj', name: 'timeZoneAdj'},
-            {data: 'action', name: 'action', orderable: false, searchable: false}
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+            {data: 'delete', name: 'delete', orderable: false, searchable: false}
         ]
         });
     });

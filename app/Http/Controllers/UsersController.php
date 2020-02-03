@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Hash;
+use Auth;
 
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
     	$query = \App\User::all();
@@ -63,5 +69,37 @@ class UsersController extends Controller
 
         return redirect()->action('UsersController@setting', ['id' => $id]);
         // return redirect()->action('HomeController@index');
+    }
+
+    public function showChangePasswordForm()
+        {
+        return view('auths.changepassword');
+    }
+
+    public function changePassword(Request $request){
+
+        if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
+            // The passwords matches
+            return redirect()->back()->with("error","Password yang kamu masukan tidak benar. Please try again.");
         }
+
+        if(strcmp($request->get('current-password'), $request->get('new-password')) == 0){
+            //Current password and new password are same
+            return redirect()->back()->with("error","Password baru tidak boleh sama dengan yang lama. Please choose a different password.");
+        }
+
+        $validatedData = $request->validate([
+            'current-password' => 'required',
+            'new-password' => 'required|string|min:6|same:new-password_confirmation',
+        ]);
+
+        //Change Password
+        $user = Auth::user();
+        $user->password = bcrypt($request->get('new-password'));
+        $user->save();
+
+        return redirect()->back()->with("success","Berhasil diganti !");
+
+    }
+
 }

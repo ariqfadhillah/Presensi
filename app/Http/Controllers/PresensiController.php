@@ -19,11 +19,14 @@ class PresensiController extends Controller
     public function getBasicData(Request $request)
      {
         $presensi = DB::table('device')
-            ->select(['serialnumber', 'location', 'timeZoneAdj']);
+            ->select(['id','serialnumber', 'location', 'timeZoneAdj']);
 
         return Datatables::of($presensi)
-            ->addColumn('action', function ($user) {
-                return '<a href="/presensi/{{$mesin->id}}/edit" class="btn btn-warning btn-sm">Edit</a>';
+            ->addColumn('action', function ($presensi) {
+                return '<a href="/presensi/'.$presensi->id.'/edit" class="btn btn-warning btn-sm">Edit</a>';
+            })
+            ->addColumn('delete', function ($presensi) {
+                return '<a href="/presensi/'.$presensi->id.'/delete" class="btn btn-danger btn-sm">Delete</a>';
             })
             ->make(true);
     }

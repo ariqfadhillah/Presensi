@@ -98,27 +98,6 @@
 										<span class="help-block alert-danger">{{$errors->first('email')}}</span>
 										@endif
 									</div>
-									<div class="form-group">
-										<label for="exampleInputPassword1">Password Lama</label>
-										<input name="password" type="password" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Password Lama" value="">
-										@if($errors->has('password'))
-										<span class="help-block alert-danger">{{$errors->first('password')}}</span>
-										@endif
-									</div>
-									<div class="form-group">
-										<label for="exampleInputPassword1">Password Baru</label>
-										<input name="new_password" type="password" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Password Baru" value="">
-										@if($errors->has('new_password'))
-										<span class="help-block alert-danger">{{$errors->first('new_password')}}</span>
-										@endif
-									</div>
-									<div class="form-group">
-										<label for="exampleInputPassword1">Re Password Baru</label>
-										<input name="confirm_password" type="password" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Password Baru" value="">
-										@if($errors->has('confirm_password'))
-										<span class="help-block alert-danger">{{$errors->first('confirm_password')}}</span>
-										@endif
-									</div>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>

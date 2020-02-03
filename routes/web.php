@@ -29,8 +29,10 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){
 
 
 Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
-	Route::post('/users/{id}/update_setting','UsersController@update_setting');
 	Route::get('/users/{id}/setting','UsersController@setting');
+	Route::post('/users/{id}/update_setting','UsersController@update_setting');
+	Route::get('/changePassword','UsersController@showChangePasswordForm');
+	Route::post('/changePassword','UsersController@changePassword')->name('changePassword');
 	Route::get('/presensi','PresensiController@index');
 	Route::get('getdatasiswa', [
 	'uses'	=> 'PresensiController@getBasicData',

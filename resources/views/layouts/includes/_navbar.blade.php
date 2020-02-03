@@ -29,6 +29,7 @@
 								{{--<li><a href=""><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
 									<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>--}}
 								<li><a href="/users/{{auth()->user()->id}}/setting"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
+								<li><a href="/changePassword"><i class="lnr lnr-cog"></i> <span>Change Password</span></a></li>
 								<li><a href="/logout"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
 							</ul>
 						</li>
