@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auths.login');
 });
 
 Route::get('/login','AuthController@login')->name('login');
@@ -32,6 +32,10 @@ Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
 	Route::post('/users/{id}/update_setting','UsersController@update_setting');
 	Route::get('/users/{id}/setting','UsersController@setting');
 	Route::get('/presensi','PresensiController@index');
+	Route::get('getdatasiswa', [
+	'uses'	=> 'PresensiController@getBasicData',
+	'as' => 'ajax',
+]);
 	Route::post('/presensi/create','PresensiController@create');
 	Route::get('/presensi/{id}/edit','PresensiController@edit');
 	Route::post('/presensi/{id}/update','PresensiController@update');

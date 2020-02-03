@@ -71,28 +71,25 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">Tambah Data Mesin Presensi</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
 							</div>
 							<div class="modal-body">
 								<form action="/users/create" method="post">
 									{{csrf_field()}}
 									<div class="form-group">
 										<label for="exampleInputEmail1">Nama Lengkap</label>
-										<input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Lengkap">
+										<input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Nama Lengkap">
 										</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Email</label>
-										<input name="email" type="email" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Email">
+										<input name="email" type="email" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Email">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Password</label>
-										<input name="password" type="password" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Password">
+										<input name="password" type="password" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Password">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Jenis Kelamin</label>
-										<select name="role" class="custom-select">
+										<select name="role" class="form-control">
 											<option value="admin">Admin</option>
 											<option value="user">User</option>
 										</select>

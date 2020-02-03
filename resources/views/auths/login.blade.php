@@ -35,13 +35,14 @@
 							</div>
 							<form class="form-auth-small" action="/postlogin" method="post">
 								{{csrf_field()}}
+
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input name="email" type="email" class="form-control" id="signin-email"  placeholder="Email">
+									<input name="email" type="email" class="form-control" id="signin-email"  placeholder="Masukan Email">
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input name="password" type="password" class="form-control" id="signin-password" placeholder="Password">
+									<input name="password" type="password" class="form-control" id="signin-password" placeholder="Masukan Password">
 								</div>
 								
 								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
