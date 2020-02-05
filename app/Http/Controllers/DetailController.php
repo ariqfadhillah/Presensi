@@ -27,26 +27,19 @@ class DetailController extends Controller
 
         $data_device = \App\Presensi::where('serialnumber', $id)->get();
 
-        // return view('detail.detail', compact('presensi','data_device'));
+        return view('detail.detail', compact('presensi','data_device'));
 
-        return Datatables::of($presensi)
-        ->make(true) ;
+        // return Datatables::of($presensi)
+        // ->make(true) ;
 
     }
 
-    public function showdata(Request $request)
+    public function showdata(Request $request, $id)
     {   
 
         $presensi = DB::table('temp_inout')->select(['deviceSN','pin', 'time', 'status']);
-
-        $device = DB::table('device')
-            ->join('temp_inout', 'serialnumber', '=', 'deviceSN')
-            ->select('serialnumber', 'location','time','pin',
-                \DB::raw('count(serialnumber) as type_count'))
-            ->groupBy('serialnumber')
-            ->get();
-
-        $dddd = \App\Detail::where('deviceSN', '=', 'ACEH191360112')->get();
+        $dddd = \App\Detail::where('deviceSN', $id)->get();
+        // $dddd = \App\Detail::where('deviceSN', '=', 'ACEH191360112')->get();
         return Datatables::of($dddd)
              ->make(true) ;
     }

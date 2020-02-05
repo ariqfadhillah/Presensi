@@ -32,8 +32,8 @@
 									@foreach($device as $index =>$transaksi)
 									<tr>
 										<td>{{$index +1}}</td>
-										<td><a href="/detail/{{$transaksi->serialnumber}}/detail">{{$transaksi->serialnumber}}</a></td>
-										<td><a href="/detail/{{$transaksi->serialnumber}}/detail">{{$transaksi->location}}</a></td>
+										<td><a href="/detail/{{$transaksi->serialnumber}}/show">{{$transaksi->serialnumber}}</a></td>
+										<td><a href="/detail/{{$transaksi->serialnumber}}/show">{{$transaksi->location}}</a></td>
 
 										<td>  <p>{{ $transaksi->type_count }} Absen</p>
 										</td>

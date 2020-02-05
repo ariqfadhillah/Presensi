@@ -49,8 +49,9 @@ Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
 	Route::get('/rekap','RekapController@index');
 	Route::get('/rekap/{id}/detail','RekapController@detail');
 	Route::get('/detail','DetailController@index');
-	Route::get('/detail/{id}/detail', [
-	'uses'	=> 'DetailController@details',
+	Route::get('/detail/{id}/detail','DetailController@details');
+	Route::get('detail/{id}/show', [
+	'uses'	=> 'DetailController@showdata',
 	'as' => 'ajaxDetail',
 	]);
 	Route::get('/dashboard','DashboardController@index');
