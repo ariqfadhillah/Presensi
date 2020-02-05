@@ -21,6 +21,10 @@ Route::get('/logout','AuthController@logout');
 
 Route::group(['middleware' => ['auth','checkRole:admin']],function(){
 	Route::get('/users','UsersController@index');
+	Route::get('getdatauser', [
+	'uses'	=> 'UsersController@getBasicData',
+	'as' => 'ajax-users',
+	]);
 	Route::post('/users/create','UsersController@create');
 	Route::get('/users/{id}/edit','UsersController@edit');
 	Route::get('/users/{id}/delete','UsersController@delete');
@@ -34,10 +38,10 @@ Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
 	Route::get('/changePassword','UsersController@showChangePasswordForm');
 	Route::post('/changePassword','UsersController@changePassword')->name('changePassword');
 	Route::get('/presensi','PresensiController@index');
-	Route::get('getdatasiswa', [
+	Route::get('getdata', [
 	'uses'	=> 'PresensiController@getBasicData',
-	'as' => 'ajax',
-]);
+	'as' => 'ajax-presensi',
+	]);
 	Route::post('/presensi/create','PresensiController@create');
 	Route::get('/presensi/{id}/edit','PresensiController@edit');
 	Route::post('/presensi/{id}/update','PresensiController@update');
@@ -46,6 +50,10 @@ Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
 	Route::get('/rekap/{id}/detail','RekapController@detail');
 	Route::get('/detail','DetailController@index');
 	Route::get('/detail/{id}/detail','DetailController@details');
+	Route::get('/detail', [
+	'uses'	=> 'DetailController@showdata',
+	'as' => 'ajaxDetail',
+	]);
 	Route::get('/dashboard','DashboardController@index');
 });
 

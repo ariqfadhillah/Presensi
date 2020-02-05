@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Hash;
 use Auth;
+use App\User;
+use Yajra\Datatables\Datatables;
+use DB;
 
 class UsersController extends Controller
 {
@@ -20,6 +23,23 @@ class UsersController extends Controller
     	return view('user.index', compact('query'));
     }
 
+    public function getBasicData(Request $request)
+     {
+        $users = DB::table('users')
+            ->select(['id','name', 'email','role']);
+
+
+        // https://stackoverflow.com/questions/45535394/laravel-datatables-multiple-actions-edit-delete-delete-displayed-as-text
+        return Datatables::of($users)
+            ->addColumn('action', function ($users) {
+                return '<a href="/users/'.$users->id.'/edit/" class="btn btn-warning btn-sm">Edit</a>';
+            })
+            ->editColumn('delete', function ($users) {
+                return '<a href="/users/'.$users->id.'/delete" class="btn btn-danger btn-sm">delete</a>';
+            })
+            ->rawColumns(['delete' => 'delete','action' => 'action'])
+            ->make(true);
+    }
     public function create(Request $request)
     {   
         // insert ke tabel users ini kalo manual
@@ -63,8 +83,8 @@ class UsersController extends Controller
 
     public function update_setting(Request $request,$id)
     {
-        $query = $request->only(["name","email","password"]);
-        $query['password'] = Hash::make($query['password']);
+        $query = $request->only(["name","email"]);
+        // $query['password'] = Hash::make($query['password']);
         \App\User::find($id)->update($query);
 
         return redirect()->action('UsersController@setting', ['id' => $id]);

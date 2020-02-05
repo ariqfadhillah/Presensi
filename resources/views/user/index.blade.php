@@ -21,10 +21,9 @@
 							
 						</div>
 						<div class="panel-body">
-							<table class="table table-hover" id="datatable">
+							<table class="table table-hover" id="table_id">
 								<thead>
 									<tr>
-										<th>No</th>
 										<th>Nama </th>
 										<th>Email / Username </th>
 										<th>Role</th>
@@ -34,7 +33,7 @@
 								</thead>
 								<tbody>
 
-									@foreach($query as $index=>$mesin)
+									<!-- @foreach($query as $index=>$mesin)
 									<tr>
 										<td>{{$index +1}}</td>
 										<td>{{$mesin->name}}</td>
@@ -46,7 +45,7 @@
 										<td><a href="/users/{{$mesin->id}}/delete" class="btn btn-danger btn-sm" 
 											onclick="return confirm('Yakin ini dihapus ?')">Delete</a></td>
 									</tr>
-									@endforeach
+									@endforeach -->
 								</tbody>
 							</table>
 						</div>
@@ -109,9 +108,26 @@
 
 @section('footer')
 <script>
-	$(document).ready( function () {
-    $('#datatable').DataTable();
-} );
-
+  $(function() {
+        $('#table_id').DataTable({
+            processing: true,
+            responsive: true,
+            serverSide: true,
+            ajax: "{{route('ajax-users')}}",
+            columns: [
+            // or just disable search since it's not really searchable. just add searchable:false
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'role', name: 'role'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+            {data: 'delete', name: 'delete', orderable: false, searchable: false}
+        ]
+        });
+    })
+  	$('.btn-danger').submit(function($users){
+  		if(!confrim('Anda yakin mau menghapus item ini ?')){
+  			event.preventDefault();
+  		}
+  	});
 </script>
 @stop

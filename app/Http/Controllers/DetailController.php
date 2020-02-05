@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Detail;
+use Yajra\Datatables\Datatables;
+use DB;
 
 class DetailController extends Controller
 {
@@ -26,5 +29,21 @@ class DetailController extends Controller
         // return view('detail/detail',['presensi' => $presensi]);
         return view('detail.detail', compact('presensi','data_device'));
 
+    }
+
+    public function showdata(Request $request)
+    {   
+
+        $presensi = DB::table('temp_inout')->select(['deviceSN','pin', 'time', 'status']);
+        
+        return Datatables::eloquent($presensi)
+        ->addColumn('time', function($id){
+            return $id->deviceSN();
+        })
+        ->addColumn('pin', function($id){
+            return $id->deviceSN();
+        })
+        ->rawColumns(['time','pin'])
+        ->tojson();
     }
 }

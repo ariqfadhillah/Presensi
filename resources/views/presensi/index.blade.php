@@ -135,18 +135,21 @@
             processing: true,
             responsive: true,
             serverSide: true,
-            ajax: "{{route('ajax')}}",
+            ajax: "{{route('ajax-presensi')}}",
             columns: [
             // or just disable search since it's not really searchable. just add searchable:false
             {data: 'serialnumber', name: 'serialnumber'},
             {data: 'location', name: 'location'},
-            {data: 'timeZoneAdj', name: 'timeZoneAdj'},
+            {data: 'timeZoneAdj', name: 'timeZoneAdj'},@if(auth()->user()->role == 'admin')
             {data: 'action', name: 'action', orderable: false, searchable: false},
-            {data: 'delete', name: 'delete', orderable: false, searchable: false}
+            {data: 'delete', name: 'delete', orderable: false, searchable: false}@endif
         ]
         });
-    });
-
-
+    })
+  	$('.btn-danger').submit(function($presensi){
+  		if(!confrim('Anda yakin mau menghapus item ini ?')){
+  			event.preventDefault();
+  		}
+  	});
 </script>
 @stop

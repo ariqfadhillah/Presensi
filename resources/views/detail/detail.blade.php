@@ -27,12 +27,12 @@
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($presensi as $index => $pres)
+									<!-- @foreach($presensi as $index => $pres)
 									<tr>
 										<td>{{$pres->time}}</td>
 										<td>{{$pres->pin}}</td>
 									</tr>
-									@endforeach
+									@endforeach -->
 								</tbody>
 							</table>
 						</div>
@@ -47,9 +47,19 @@
 
 @section('footer')
 <script>
-	$(document).ready( function () {
-		$('#table_id').DataTable();
-	} );
+  $(function() {
+        $('#table_id').DataTable({
+            processing: true,
+            responsive: true,
+            serverSide: true,
+            ajax: "{{route('ajaxDetail') }}",
+            columns: [
+            // or just disable search since it's not really searchable. just add searchable:false
+            {data: 'time', name: 'time'},
+            {data: 'pin', name: 'pin'}
+        ]
+        });
+    });
 
 </script>
 @stop
