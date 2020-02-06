@@ -19,7 +19,7 @@
 							@endforeach
 						</div>
 						<div class="panel-body">
-							<table id="table_id" class="display">
+							<table id="table_id" class="table table-hover">
 								<thead>
 									<tr>
 										<th>Waktu Absen</th>
@@ -27,14 +27,18 @@
 									</tr>
 								</thead>
 								<tbody>
-									<!-- @foreach($presensi as $index => $pres)
+									@foreach($presensi as $index => $pres)
 									<tr>
 										<td>{{$pres->time}}</td>
 										<td>{{$pres->pin}}</td>
 									</tr>
-									@endforeach -->
+									@endforeach
 								</tbody>
 							</table>
+							{{ $presensi->links() }}
+							Halaman : {{ $presensi->currentPage() }} <br/>
+							Jumlah Data : {{ $presensi->total() }} <br/>
+							Data Per Halaman : {{ $presensi->perPage() }} <br/>
 						</div>
 					</div>
 				</div>
@@ -46,20 +50,9 @@
 @stop
 
 @section('footer')
-<script>
-  $(function() {
-        $('#table_id').DataTable({
-            processing: true,
-            responsive: true,
-            serverSide: true,
-            ajax: "{{route('ajaxDetail') }}",
-            columns: [
-            // or just disable search since it's not really searchable. just add searchable:false
-            {data: 'time', name: 'time'},
-            {data: 'pin', name: 'pin'}
-        ]
-        });
-    });
-
-</script>
+<!-- <script>
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script> -->
 @stop

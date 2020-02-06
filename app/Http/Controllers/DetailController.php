@@ -23,7 +23,8 @@ class DetailController extends Controller
     public function details(Request $request,$id)
     {
 
-        $presensi = \App\Detail::where('deviceSN', $id)->get();
+        $presensi = \App\Detail::where('deviceSN', $id)
+                                ->paginate(10);
 
         $data_device = \App\Presensi::where('serialnumber', $id)->get();
 
@@ -38,9 +39,20 @@ class DetailController extends Controller
     {   
 
         $presensi = DB::table('temp_inout')->select(['deviceSN','pin', 'time', 'status']);
-        $dddd = \App\Detail::where('deviceSN', $id)->get();
+
+        $serialyangterpilih = \App\Detail::where('deviceSN', $id)
+
+                            ->get();
+
         // $dddd = \App\Detail::where('deviceSN', '=', 'ACEH191360112')->get();
-        return Datatables::of($dddd)
-             ->make(true) ;
+        return Datatables::of($serialyangterpilih)
+        ->addColumn('time', function ($serialyangterpilih) {
+                return ;
+        })
+        ->editColumn('pin', function ($serialyangterpilih) {
+                return ;
+        })
+        ->rawColumns(['time' => 'time','pin' => 'pin'])
+        ->make(true) ;
     }
 }
