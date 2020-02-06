@@ -24,7 +24,7 @@ class DetailController extends Controller
     {
 
         $presensi = \App\Detail::where('deviceSN', $id)
-                                ->paginate(10);
+                                ->paginate(100);
 
         $data_device = \App\Presensi::where('serialnumber', $id)->get();
 

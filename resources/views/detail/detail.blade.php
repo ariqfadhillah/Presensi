@@ -19,9 +19,11 @@
 							@endforeach
 						</div>
 						<div class="panel-body">
-							<table id="table_id" class="table table-hover">
+							<div class="dataTables_wrapper no-footer">
+								<table id="table_id" class="table table-hover">
 								<thead>
 									<tr>
+
 										<th>Waktu Absen</th>
 										<th>Pin </th>
 									</tr>
@@ -34,11 +36,18 @@
 									</tr>
 									@endforeach
 								</tbody>
-							</table>
-							{{ $presensi->links() }}
-							Halaman : {{ $presensi->currentPage() }} <br/>
-							Jumlah Data : {{ $presensi->total() }} <br/>
-							Data Per Halaman : {{ $presensi->perPage() }} <br/>
+								</table>
+								<div class="dataTables_info">
+ 											Showing  {{ $presensi->firstItem() }} 
+ 											to  {{ $presensi->lastItem() }} of
+ 											{{ $presensi->total() }} entries
+								</div>
+								<div id="table_id_paginate" class="dataTables_paginate paging_simple_numbers">
+
+											{{ $presensi->links() }}
+											Data Per Halaman : {{ $presensi->perPage() }}
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
