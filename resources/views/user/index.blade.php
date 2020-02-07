@@ -124,10 +124,16 @@
         ]
         });
     })
-  	$('.btn-danger').submit(function($users){
-  		if(!confrim('Anda yakin mau menghapus item ini ?')){
-  			event.preventDefault();
-  		}
-  	});
+  $("body").on('click', '.toggle-password', function() {
+	  $(this).toggleClass("fa-eye fa-eye-slash");
+	  	var input = $("#exampleInputPassword1");
+		  if (input.attr("type") === "password") {
+		    input.attr("type", "text");
+		  } else {
+		    input.attr("type", "password");
+		  }
+	});
+
 </script>
+
 @stop

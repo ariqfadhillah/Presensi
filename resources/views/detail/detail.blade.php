@@ -45,7 +45,7 @@
 								<div id="table_id_paginate" class="dataTables_paginate paging_simple_numbers">
 
 											{{ $presensi->links() }}
-											Data Per Halaman : {{ $presensi->perPage() }}
+											Show {{ $presensi->perPage() }} entries
 								</div>
 							</div>
 						</div>

@@ -28,8 +28,19 @@
 			<div class="vertical-align-middle">
 				<div class="auth-box ">
 					<div class="left">
+							@if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                            @endif
+                            @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                            @endif
 						<div class="content">
 							<div class="header">
+							
 								<div class="logo text-center"><img src="{{asset('assets/img/logo-dark.png')}}" alt="Klorofil Logo"></div>
 								<p class="lead">Login</p>
 							</div>
@@ -38,11 +49,25 @@
 
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input name="email" type="email" class="form-control" id="signin-email"  placeholder="Masukan Email">
+									<input name="email" type="email" class="form-control" id="signin-email"  placeholder="Masukan Email" required>
+
+									@if ($errors->has('email'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('email') }}</strong>
+                                        </span>
+                                    @endif
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input name="password" type="password" class="form-control" id="signin-password" placeholder="Masukan Password">
+									<input name="password" type="password" class="form-control" id="pass_log_id" placeholder="Masukan Password" required>
+
+									<span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password" style="margin-right: 410px;">Show/Hide</span>
+
+									@if ($errors->has('password'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('password') }}</strong>
+                                        </span>
+                                    @endif
 								</div>
 								
 								<button type="submit" class="btn btn-primary btn-lg btn-block">LOGIN</button>
@@ -64,5 +89,18 @@
 	</div>
 	<!-- END WRAPPER -->
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+	$("body").on('click', '.toggle-password', function() {
+  $(this).toggleClass("fa-eye fa-eye-slash");
+  var input = $("#pass_log_id");
+  if (input.attr("type") === "password") {
+    input.attr("type", "text");
+  } else {
+    input.attr("type", "password");
+  }
+
+});
+</script>
 
 </html>
