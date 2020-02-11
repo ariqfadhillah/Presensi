@@ -16,7 +16,8 @@
 // });
 
 Route::get('/', function () {
-    return redirect('/presensi');
+	return redirect('/dashboard');
+	// return view('auths.login');
 });
 
 Route::get('/login','AuthController@login')->name('login');
