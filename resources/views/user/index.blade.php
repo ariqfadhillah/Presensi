@@ -21,10 +21,9 @@
 							
 						</div>
 						<div class="panel-body">
-							<table class="table table-hover" id="datatable">
+							<table class="table table-hover" id="table_id">
 								<thead>
 									<tr>
-										<th>No</th>
 										<th>Nama </th>
 										<th>Email / Username </th>
 										<th>Role</th>
@@ -34,7 +33,7 @@
 								</thead>
 								<tbody>
 
-									@foreach($query as $index=>$mesin)
+									<!-- @foreach($query as $index=>$mesin)
 									<tr>
 										<td>{{$index +1}}</td>
 										<td>{{$mesin->name}}</td>
@@ -46,7 +45,7 @@
 										<td><a href="/users/{{$mesin->id}}/delete" class="btn btn-danger btn-sm" 
 											onclick="return confirm('Yakin ini dihapus ?')">Delete</a></td>
 									</tr>
-									@endforeach
+									@endforeach -->
 								</tbody>
 							</table>
 						</div>
@@ -71,28 +70,25 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">Tambah Data Mesin Presensi</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
 							</div>
 							<div class="modal-body">
 								<form action="/users/create" method="post">
 									{{csrf_field()}}
 									<div class="form-group">
 										<label for="exampleInputEmail1">Nama Lengkap</label>
-										<input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Lengkap">
+										<input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Nama Lengkap">
 										</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Email</label>
-										<input name="email" type="email" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Email">
+										<input name="email" type="email" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Email">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Password</label>
-										<input name="password" type="password" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Password">
+										<input name="password" type="password" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Password">
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Jenis Kelamin</label>
-										<select name="role" class="custom-select">
+										<select name="role" class="form-control">
 											<option value="admin">Admin</option>
 											<option value="user">User</option>
 										</select>
@@ -112,9 +108,32 @@
 
 @section('footer')
 <script>
-	$(document).ready( function () {
-    $('#datatable').DataTable();
-} );
+  $(function() {
+        $('#table_id').DataTable({
+            processing: true,
+            responsive: true,
+            serverSide: true,
+            ajax: "{{route('ajax-users')}}",
+            columns: [
+            // or just disable search since it's not really searchable. just add searchable:false
+            {data: 'name', name: 'name'},
+            {data: 'email', name: 'email'},
+            {data: 'role', name: 'role'},
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+            {data: 'delete', name: 'delete', orderable: false, searchable: false}
+        ]
+        });
+    })
+  $("body").on('click', '.toggle-password', function() {
+	  $(this).toggleClass("fa-eye fa-eye-slash");
+	  	var input = $("#exampleInputPassword1");
+		  if (input.attr("type") === "password") {
+		    input.attr("type", "text");
+		  } else {
+		    input.attr("type", "password");
+		  }
+	});
 
 </script>
+
 @stop

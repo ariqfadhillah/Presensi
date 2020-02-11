@@ -3,7 +3,6 @@
 @section('content')
 <div class="main">
 	<div class="main-content">
-		<h1>EDIT DATA MESIN PRESENSI</b></h1>	
 		@if(session('sukses'))
 		<div class="alert alert-success" role="alert">
 			{{session('sukses')}}
@@ -20,17 +19,16 @@
 							<form action="/presensi/{{$presensi->id}}/update" method="post" enctype="multipart/form-data">
 								{{csrf_field()}}
 								<div class="form-group">
-									<label for="exampleInputEmail1">No Mesin</label>
-									<input name="serialnumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Depan" value="{{$presensi->serialnumber}}">
+										<label for="exampleInputEmail1">No Mesin</label>
+										<input name="serialnumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan No-MESIN" value="{{$presensi->serialnumber}}">
 									</div>
 								<div class="form-group">
-									<label for="exampleInputPassword1">Lokasi</label>
-									<input name="location" type="text" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Nama Belakang" value="{{$presensi->location}}">
+										<label for="exampleInputPassword1">Lokasi</label>
+										<input name="location" type="text" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Lokasi MESIN" value="{{$presensi->location}}">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputPassword1" class="outline">TimeZone</label>
-								
-								<select name="timeZoneAdj" class="custom-select">
+										<label for="exampleInputPassword1" style="margin-right: 20px">TimeZone</label>
+										<select name="timeZoneAdj" class="form-control">
 									<option value="0" @if($presensi->timeZoneAdj == '0') selected @endif>0</option>
 									<option value="1" @if($presensi->timeZoneAdj == '1') selected @endif>1</option>
 									<option value="2" @if($presensi->timeZoneAdj == '2') selected @endif>2</option>
@@ -59,7 +57,9 @@
 								</div>
 								
 							</div>
+							<div class="modal-footer">
 								<button type="submit" class="btn btn-warning">Update</button>
+							</div>
 							</form>
 						</div>
 					</div>

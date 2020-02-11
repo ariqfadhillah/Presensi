@@ -5,7 +5,7 @@
 	<!-- MAIN CONTENT -->
 	<div class="main-content">
 		<div class="container-fluid">
-			<div class="panel panel-profile">
+			<div class="panel panel-profile" style="margin-bottom: 0%;">
 				<div class="clearfix">
 					<!-- LEFT COLUMN -->
 					<div class="profile-left">
@@ -21,18 +21,7 @@
 						</div>
 						<!-- END PROFILE HEADER -->
 						<!-- PROFILE DETAIL -->
-						<div class="profile-detail">
-							<div class="profile-info">
-								<h4 class="heading">Data Diri</h4>
-								<ul class="list-unstyled list-justify">
-									<li>Jenis Kelamin <span>--</span></li>
-									<li>Agama <span>--</span></li>
-									<li>Alamat <span>--</span></li>
-								</ul>
-							</div>
-
-							<div class="text-center"><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Edit Data</a></div>
-						</div>
+						
 						<!-- END PROFILE DETAIL -->
 					</div>
 					<!-- END LEFT COLUMN -->
@@ -64,6 +53,12 @@
 									</tbody>
 								</table>
 							</div>
+							<div class="panel-footer">
+									<div class="row">
+										
+										<div class="col-md-12 text-right"><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">Edit Data</a></div>
+									</div>
+								</div>
 						</div>
 					</div>
 					<!-- END RIGHT COLUMN -->
@@ -84,9 +79,6 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
 							</div>
 							<div class="panel-body">
 								<form action="/users/{{$query->id}}/update_setting" method="post" enctype="multipart/form-data">
@@ -94,18 +86,22 @@
 
 									<div class="form-group">
 										<label for="exampleInputEmail1">Nama Lengkap</label>
-										<input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Depan" value="{{$query->name}}">
+										<input name="name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan Nama Lengkap" value="{{$query->name}}">
+										@if($errors->has('name'))
+										<span class="help-block alert-danger">{{$errors->first('name')}}</span>
+										@endif
 									</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Email</label>
-										<input name="email" type="email" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Nama Belakang" value="{{$query->email}}">
-									</div>
-									<div class="form-group">
-										<label for="exampleInputPassword1">Password</label>
-										<input name="password" type="password" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Password" value="">
+										<input name="email" type="email" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Email" value="{{$query->email}}">
+										@if($errors->has('email'))
+										<span class="help-block alert-danger">{{$errors->first('email')}}</span>
+										@endif
 									</div>
 								</div>
-								<button type="submit" class="btn btn-warning">Update</button>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+									<button type="submit" class="btn btn-primary btn-sm">Update</button>
 							</form>
 						</div>
 					</div>

@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <head>
 	<title>Mesin Presensi | Klorofil - Free Bootstrap Dashboard Template</title>
 	<meta charset="utf-8">
@@ -19,7 +19,10 @@
 	<!-- ICONS -->
 	<link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/img/apple-icon.png')}}">
 	<link rel="icon" type="image/png" sizes="96x96" href="{{asset('assets/img/favicon.png')}}">
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://editor.datatables.net/extensions/Editor/css/editor.dataTables.min.css">
+	
+	
   
  
   @yield('header')
@@ -51,10 +54,14 @@
 	<script src="{{asset('assets/vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
 	<script src="{{asset('assets/scripts/klorofil-common.js')}}"></script> 
-	
+
 	<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+	<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script src="https://editor.datatables.net/extensions/Editor/js/dataTables.editor.min.js"></script>
+
+
 	@yield('footer')
 </body>
 

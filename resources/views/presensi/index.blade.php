@@ -23,11 +23,9 @@
 							
 						</div>
 						<div class="panel-body">
-<!-- ini table ke 1 -->
 							<table id="table_id" class="display">
 							    <thead>
 							        <tr>
-										<th>No</th>
 										<th>No Mesin </th>
 										<th>Lokasi </th>
 										<th>Timezone</th>
@@ -39,7 +37,7 @@
 							    </thead>
 							    <tbody>
 
-									@foreach($data_device as $index =>$mesin)
+									<!-- @foreach($data_device as $index =>$mesin)
 									<tr>
 										<td>{{$index +1}}</td>
 										<td>{{$mesin->serialnumber}}</td>
@@ -50,7 +48,7 @@
 											onclick="return confirm('Yakin ini dihapus ?')">Delete</a></td>
 											@endif
 									</tr>
-									@endforeach
+									@endforeach -->
 								</tbody>
 							</table>
 							<br>
@@ -76,24 +74,21 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">Tambah Data Mesin Presensi</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
 							</div>
 							<div class="modal-body">
 								<form action="/presensi/create" method="post">
 									{{csrf_field()}}
 									<div class="form-group">
 										<label for="exampleInputEmail1">No Mesin</label>
-										<input name="serialnumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nama Depan">
+										<input name="serialnumber" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Masukan No-MESIN">
 										</div>
 									<div class="form-group">
 										<label for="exampleInputPassword1">Lokasi</label>
-										<input name="location" type="text" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Nama Belakang">
+										<input name="location" type="text" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp" placeholder="Masukan Lokasi MESIN">
 									</div>
 									<div class="form-group">
-										<label for="exampleInputPassword1">TimeZone</label>
-										<select name="timeZoneAdj" class="custom-select">
+										<label for="exampleInputPassword1" style="margin-right: 20px">TimeZone</label>
+										<select name="timeZoneAdj" class="form-control">
 											<option value="0">0</option>
 											<option value="1">1</option>
 											<option value="2">2</option>
@@ -135,9 +130,26 @@
 @stop
 @section('footer')
 <script>
-$(document).ready( function () {
-    $('#table_id').DataTable();
-} );
-
+  $(function() {
+        $('#table_id').DataTable({
+            processing: true,
+            responsive: true,
+            serverSide: true,
+            ajax: "{{route('ajax-presensi')}}",
+            columns: [
+            // or just disable search since it's not really searchable. just add searchable:false
+            {data: 'serialnumber', name: 'serialnumber'},
+            {data: 'location', name: 'location'},
+            {data: 'timeZoneAdj', name: 'timeZoneAdj'},@if(auth()->user()->role == 'admin')
+            {data: 'action', name: 'action', orderable: false, searchable: false},
+            {data: 'delete', name: 'delete', orderable: false, searchable: false}@endif
+        ]
+        });
+    })
+  	$('.btn-danger').submit(function($presensi){
+  		if(!confrim('Anda yakin mau menghapus item ini ?')){
+  			event.preventDefault();
+  		}
+  	});
 </script>
 @stop

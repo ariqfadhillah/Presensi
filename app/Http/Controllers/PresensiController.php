@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Presensi;
+use Yajra\Datatables\Datatables;
+use DB;
+
 
 class PresensiController extends Controller
 {
@@ -10,6 +14,24 @@ class PresensiController extends Controller
     {
         $data_device = \App\Presensi::all();
     	return view('presensi.index',['data_device' => $data_device]);
+    }
+
+    public function getBasicData(Request $request)
+     {
+        $presensi = DB::table('device')
+            ->select(['id','serialnumber', 'location', 'timeZoneAdj']);
+
+
+        // https://stackoverflow.com/questions/45535394/laravel-datatables-multiple-actions-edit-delete-delete-displayed-as-text
+        return Datatables::of($presensi)
+            ->addColumn('action', function ($presensi) {
+                return '<a href="/presensi/'.$presensi->id.'/edit" class="btn btn-warning btn-sm">Edit</a>';
+            })
+            ->editColumn('delete', function ($presensi) {
+                return '<a href="/presensi/'.$presensi->id.'/delete" class="btn btn-danger btn-sm">delete</a>';
+            })
+            ->rawColumns(['delete' => 'delete','action' => 'action'])
+            ->make(true);
     }
 
     public function create(Request $request)

@@ -25,6 +25,10 @@ Route::get('/logout','AuthController@logout');
 
 Route::group(['middleware' => ['auth','checkRole:admin']],function(){
 	Route::get('/users','UsersController@index');
+	Route::get('getdatauser', [
+	'uses'	=> 'UsersController@getBasicData',
+	'as' => 'ajax-users',
+	]);
 	Route::post('/users/create','UsersController@create');
 	Route::get('/users/{id}/edit','UsersController@edit');
 	Route::get('/users/{id}/delete','UsersController@delete');
@@ -36,7 +40,14 @@ Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
 	// Route::get('/','PresensiController@index');
 	Route::post('/users/{id}/update_setting','UsersController@update_setting');
 	Route::get('/users/{id}/setting','UsersController@setting');
+	Route::post('/users/{id}/update_setting','UsersController@update_setting');
+	Route::get('/changePassword','UsersController@showChangePasswordForm');
+	Route::post('/changePassword','UsersController@changePassword')->name('changePassword');
 	Route::get('/presensi','PresensiController@index');
+	Route::get('getdata', [
+	'uses'	=> 'PresensiController@getBasicData',
+	'as' => 'ajax-presensi',
+	]);
 	Route::post('/presensi/create','PresensiController@create');
 	Route::get('/presensi/{id}/edit','PresensiController@edit');
 	Route::post('/presensi/{id}/update','PresensiController@update');
@@ -44,7 +55,12 @@ Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
 	Route::get('/rekap','RekapController@index');
 	Route::get('/rekap/{id}/detail','RekapController@detail');
 	Route::get('/detail','DetailController@index');
-	Route::get('/detail/{id}/detail','DetailController@details');
+	Route::get('/detail/{id}/show','DetailController@details');
+	// Route::get('detail/{id}/show', [
+	// 'uses'	=> 'DetailController@showdata',
+	// 'as' => 'ajax-detail',], function($id) {
+	// 	return view('detail.index');
+	// });
 	Route::get('/dashboard','DashboardController@index');
 });
 

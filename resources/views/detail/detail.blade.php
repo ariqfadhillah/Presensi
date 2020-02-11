@@ -19,9 +19,11 @@
 							@endforeach
 						</div>
 						<div class="panel-body">
-							<table id="table_id" class="display">
+							<div class="dataTables_wrapper no-footer">
+								<table id="table_id" class="table table-hover">
 								<thead>
 									<tr>
+
 										<th>Waktu Absen</th>
 										<th>Pin </th>
 									</tr>
@@ -34,7 +36,18 @@
 									</tr>
 									@endforeach
 								</tbody>
-							</table>
+								</table>
+								<div class="dataTables_info">
+ 											Showing  {{ $presensi->firstItem() }} 
+ 											to  {{ $presensi->lastItem() }} of
+ 											{{ $presensi->total() }} entries
+								</div>
+								<div id="table_id_paginate" class="dataTables_paginate paging_simple_numbers">
+
+											{{ $presensi->links() }}
+											Show {{ $presensi->perPage() }} entries
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -46,10 +59,9 @@
 @stop
 
 @section('footer')
-<script>
-	$(document).ready( function () {
-		$('#table_id').DataTable();
-	} );
-
-</script>
+<!-- <script>
+$(document).ready( function () {
+    $('#table_id').DataTable();
+} );
+</script> -->
 @stop
