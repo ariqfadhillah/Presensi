@@ -11,8 +11,12 @@
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/presensi');
 });
 
 Route::get('/login','AuthController@login')->name('login');
@@ -29,6 +33,7 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){
 
 
 Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
+	// Route::get('/','PresensiController@index');
 	Route::post('/users/{id}/update_setting','UsersController@update_setting');
 	Route::get('/users/{id}/setting','UsersController@setting');
 	Route::get('/presensi','PresensiController@index');
