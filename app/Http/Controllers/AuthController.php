@@ -15,18 +15,12 @@ class AuthController extends Controller
     public function postlogin(Request $request)
     {
     	if(Auth::attempt($request->only('email','password'))){
-<<<<<<< HEAD
             return Redirect::intended('/dashboard'); //see this line
             
         }else{
                 
             return Redirect::to('/login')->with('error', 'Invalid username or password')->withInput();
         }
-=======
-    		return redirect()->intended('/dashboard');
-    	}
-    	return redirect('/login');
->>>>>>> github/master
     }
 
     public function logout()
