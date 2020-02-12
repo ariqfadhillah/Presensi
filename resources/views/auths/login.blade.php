@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="{{asset('assets/vendor/linearicons/style.css')}}">
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{{asset('assets/css/main.css')}}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 	<link rel="stylesheet" href="{{asset('assets/css/demo.css')}}">
 	<!-- GOOGLE FONTS -->
@@ -28,16 +29,6 @@
 			<div class="vertical-align-middle">
 				<div class="auth-box ">
 					<div class="left">
-							@if (session('error'))
-                            <div class="alert alert-danger">
-                                {{ session('error') }}
-                            </div>
-                            @endif
-                            @if (session('success'))
-                            <div class="alert alert-success">
-                                {{ session('success') }}
-                            </div>
-                            @endif
 						<div class="content">
 							<div class="header">
 							
@@ -49,7 +40,7 @@
 
 								<div class="form-group">
 									<label for="signin-email" class="control-label sr-only">Email</label>
-									<input name="email" type="email" class="form-control" id="signin-email"  placeholder="Masukan Email" required>
+									<input name="email" type="email" class="form-control" id="signin-email"  placeholder="Masukan Email" value="{{old('email')}}" required>
 
 									@if ($errors->has('email'))
                                         <span class="help-block">
@@ -59,7 +50,7 @@
 								</div>
 								<div class="form-group">
 									<label for="signin-password" class="control-label sr-only">Password</label>
-									<input name="password" type="password" class="form-control" id="pass_log_id" placeholder="Masukan Password" required>
+									<input name="password" type="password" class="form-control" id="pass_log_id" placeholder="Masukan Password" value="{{old('password')}}" required>
 
 									<span toggle="#password-field" class="fa fa-fw fa-eye field_icon toggle-password" style="margin-right: 410px;">Show/Hide</span>
 
@@ -78,8 +69,8 @@
 					<div class="right">
 						<div class="overlay"></div>
 						<div class="content text">
-							<h1 class="heading">Aplikasi Presensi Pak Yudi</h1>
-							<p>by The Ariq_Fadh</p>
+							<h1 class="heading">MACHINE PRESENSI ACT</h1>
+							<p>by Ariq_Fadh</p>
 						</div>
 					</div>
 					<div class="clearfix"></div>
@@ -90,6 +81,7 @@
 	<!-- END WRAPPER -->
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
 	$("body").on('click', '.toggle-password', function() {
   $(this).toggleClass("fa-eye fa-eye-slash");
@@ -102,5 +94,11 @@
 
 });
 </script>
+<script>
+		@if(Session::has('error')){
+			toastr.error('{{Session::get('error')}}', 'Afwan')
+		}
+		@endif
+	</script>
 
 </html>
