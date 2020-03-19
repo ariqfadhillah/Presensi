@@ -28,10 +28,10 @@
 								</div>
 								<div class="col-md-6">
 									<div class="metric">
-										<span class="icon"><i class="fa fa-shopping-user"></i></span>
+										<span class="icon"><i class="fa fa-user"></i></span>
 										<p>
 											<span class="number">{{totalPengguna()}}</span>
-											<span class="title">Pengunjung</span>
+											<span class="title">Banyak Petugas</span>
 										</p>
 									</div>
 								</div>
@@ -50,8 +50,8 @@
 		y = n.getFullYear();
 		m = n.getMonth() + 1;
 		d = n.getDate();
-		j = n.getHours()+1;
-		t = n.getMinutes()+1;
+		j = n.getHours();
+		t = n.getMinutes();
 		document.getElementById("datetime").innerHTML = d + "/" + m + "/" + y;
 		document.getElementById("datetimes").innerHTML = j + ":" + t;
 </script>

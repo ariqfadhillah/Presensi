@@ -20,9 +20,17 @@ Route::get('/', function () {
 	// return view('auths.login');
 });
 
+// -----------------------
+// ---- login disini -----
+// -----------------------
+
 Route::get('/login','AuthController@login')->name('login');
 Route::post('/postlogin','AuthController@postlogin');
 Route::get('/logout','AuthController@logout');
+
+// -----------------------------------------------------------
+// -ini middleware untuk mengecek apakah yg masuk adalah admin
+// -----------------------------------------------------------
 
 Route::group(['middleware' => ['auth','checkRole:admin']],function(){
 	Route::get('/users','UsersController@index');
@@ -34,11 +42,16 @@ Route::group(['middleware' => ['auth','checkRole:admin']],function(){
 	Route::get('/users/{id}/edit','UsersController@edit');
 	Route::get('/users/{id}/delete','UsersController@delete');
 	Route::post('/users/{id}/update','UsersController@update');
+// -----------------------------------------------------------
+// -ini untuk Master User
+// -----------------------------------------------------------	
 });
 
+// ------------------------------------------------------------------
+// -ini middleware untuk mengecek apakah yg masuk adalah admin / user
+// ------------------------------------------------------------------
 
 Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
-	// Route::get('/','PresensiController@index');
 	Route::post('/users/{id}/update_setting','UsersController@update_setting');
 	Route::get('/users/{id}/setting','UsersController@setting');
 	Route::post('/users/{id}/update_setting','UsersController@update_setting');
@@ -49,19 +62,26 @@ Route::group(['middleware' => ['auth','checkRole:admin,user']],function(){
 	'uses'	=> 'PresensiController@getBasicData',
 	'as' => 'ajax-presensi',
 	]);
+
+// -----------------------------------------------------------
+// -ini untuk Master Mesin Presensi
+// -----------------------------------------------------------		
 	Route::post('/presensi/create','PresensiController@create');
 	Route::get('/presensi/{id}/edit','PresensiController@edit');
 	Route::post('/presensi/{id}/update','PresensiController@update');
 	Route::get('/presensi/{id}/delete','PresensiController@delete');
+
+// -----------------------------------------------------------
+// -ini untuk Master Mesin Rekap
+// -----------------------------------------------------------		
 	Route::get('/rekap','RekapController@index');
 	Route::get('/rekap/{id}/detail','RekapController@detail');
 	Route::get('/detail','DetailController@index');
 	Route::get('/detail/{id}/show','DetailController@details');
-	// Route::get('detail/{id}/show', [
-	// 'uses'	=> 'DetailController@showdata',
-	// 'as' => 'ajax-detail',], function($id) {
-	// 	return view('detail.index');
-	// });
+
+// -----------------------------------------------------------
+// -ini untuk Dashboard
+// -----------------------------------------------------------	
 	Route::get('/dashboard','DashboardController@index');
 });
 
