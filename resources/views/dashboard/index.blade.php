@@ -31,7 +31,7 @@
 										<span class="icon"><i class="fa fa-user"></i></span>
 										<p>
 											<span class="number">{{totalPengguna()}}</span>
-											<span class="title">Banyak Petugas</span>
+											<span class="title">Banyak User</span>
 										</p>
 									</div>
 								</div>
